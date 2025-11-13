@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - WhereNext</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'wherenext_a/style.css' %}">
+</head>
+<body>
+    <div class="navbar">
+        <h2>WhereNext</h2>
+        <div>
+            <a href="/">Home</a>
+            <a href="/signup/">Signup</a>
+        </div>
+    </div>
+
+    <div class="container">
+        {% if messages %}
+            {% for msg in messages %}
+                <p class="msg {{ msg.tags }}">{{ msg }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <h2>Login</h2>
+        <form method="post" action="/login/">
+            {% csrf_token %}
+            <label>Email:</label>
+            <input type="email" name="email" required>
+
+            <label>Password:</label>
+            <input type="password" name="password" required>
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>
