@@ -1,46 +1,56 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>Signup - WhereNext</title>
-    {% load static %}
     <link rel="stylesheet" href="{% static 'wherenext_a/style.css' %}">
 </head>
-<body>
-    <div class="navbar">
-        <h2>WhereNext</h2>
-        <div>
-            <a href="/">Home</a>
-            <a href="/login/">Login</a>
-        </div>
-    </div>
 
-    <div class="container">
-        {% if messages %}
-            {% for msg in messages %}
-                <p class="msg {{ msg.tags }}">{{ msg }}</p>
-            {% endfor %}
+<body>
+
+{% include 'wherenext_a/header.html' %}
+
+<div class="container form-box">
+    <div class="card">
+
+        <h3 class="center">Signup</h3>
+
+        {% if error %}
+            <p class="msg error">{{ error }}</p>
+        {% endif %}
+        {% if success %}
+            <p class="msg success">{{ success }}</p>
         {% endif %}
 
-        <h2>Signup</h2>
-        <form method="post" action="/signup/">
+        <form method="POST">
             {% csrf_token %}
-            <label>Name:</label>
-            <input type="text" name="name" required>
 
-            <label>Email:</label>
+            <label>Username</label>
+            <input type="text" name="username" required>
+
+            <label>Email</label>
             <input type="email" name="email" required>
 
-            <label>Mobile:</label>
-            <input type="text" name="mobile" required>
+            <label>Mobile</label>
+            <input type="text" name="mobile">
 
-            <label>Password:</label>
+            <label>Password</label>
             <input type="password" name="password" required>
 
-            <label>Confirm Password:</label>
+            <label>Confirm Password</label>
             <input type="password" name="confirm" required>
 
-            <button type="submit">Signup</button>
+            <button type="submit" class="btn">Signup</button>
+
+            <p class="small">
+                Already have an account? <a href="/login/">Login</a>
+            </p>
         </form>
+
     </div>
+</div>
+
+{% include 'wherenext_a/footer.html' %}
+
 </body>
 </html>

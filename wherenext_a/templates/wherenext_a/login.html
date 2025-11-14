@@ -1,37 +1,48 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>Login - WhereNext</title>
-    {% load static %}
     <link rel="stylesheet" href="{% static 'wherenext_a/style.css' %}">
 </head>
-<body>
-    <div class="navbar">
-        <h2>WhereNext</h2>
-        <div>
-            <a href="/">Home</a>
-            <a href="/signup/">Signup</a>
-        </div>
-    </div>
 
-    <div class="container">
-        {% if messages %}
-            {% for msg in messages %}
-                <p class="msg {{ msg.tags }}">{{ msg }}</p>
-            {% endfor %}
+<body>
+
+{% include 'wherenext_a/header.html' %}
+
+<div class="container form-box">
+    <div class="card">
+
+        <h3 class="center">Login</h3>
+
+        {% for m in messages %}
+            <p class="msg">{{ m }}</p>
+        {% endfor %}
+
+        {% if error %}
+            <p class="msg error">{{ error }}</p>
         {% endif %}
 
-        <h2>Login</h2>
-        <form method="post" action="/login/">
+        <form method="POST">
             {% csrf_token %}
-            <label>Email:</label>
-            <input type="email" name="email" required>
 
-            <label>Password:</label>
+            <label>Username / Email</label>
+            <input type="text" name="identifier" required>
+
+            <label>Password</label>
             <input type="password" name="password" required>
 
-            <button type="submit">Login</button>
+            <button type="submit" class="btn">Login</button>
+
+            <p class="small">
+                New user? <a href="/signup/">Create account</a>
+            </p>
         </form>
+
     </div>
+</div>
+
+{% include 'wherenext_a/footer.html' %}
+
 </body>
 </html>
